@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ga">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Clásal Coibhneasta — Gaeilge Uladh</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0d0f0e;
+    --surface:   #131810;
+    --card:      #191f16;
+    --border:    #2c3828;
+    --border2:   #44573e;
+    --amber:     #c9913a;
+    --amber-dim: #9a6c24;
+    --sage:      #7eb87a;
+    --sage-dim:  #4d8a4a;
+    --red:       #b85c5c;
+    --green:     #5a9e72;
+    --text:      #e6dfd4;
+    --text-dim:  #96a890;
+    --text-faint:#4e6448;
+    --ulster:    #d4a843;
+    --note-bg:   #1a221a;
+    --direct-col:#7eb87a;
+    --indirect-col:#c9913a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(180deg, #080a07 0%, #0d0f0e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.2rem 1.5rem 1.6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% -20%, rgba(126,184,122,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .header-kicker {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    color: var(--sage-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    font-weight: 500;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+  }
+  .header-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    margin-top: 0.4rem;
+  }
+  .ornament { color: var(--border2); font-size: 0.9rem; letter-spacing: 0.7em; margin-top: 0.9rem; display: block; }
+
+  /* ── TABS ── */
+  nav {
+    display: flex;
+    overflow-x: auto;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.85rem 0.8rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.02); }
+  .tab-btn.active { color: var(--amber); border-bottom-color: var(--amber); background: rgba(201,145,58,0.04); }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 1.5rem; max-width: 860px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* ── TYPOGRAPHY ── */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: var(--amber);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.3rem;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+  }
+  h3.group {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── RULE CARD ── */
+  .rule-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .rule-card.direct { border-left: 3px solid var(--direct-col); }
+  .rule-card.indirect { border-left: 3px solid var(--indirect-col); }
+  .rule-card.negative { border-left: 3px solid var(--red); }
+  .rule-card.ulster-note { border-left: 3px solid var(--ulster); }
+
+  .rule-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px dashed var(--border2);
+  }
+  .rule-card.direct .rule-title { color: var(--direct-col); }
+  .rule-card.indirect .rule-title { color: var(--indirect-col); }
+  .rule-card.negative .rule-title { color: var(--red); }
+  .rule-card.ulster-note .rule-title { color: var(--ulster); }
+
+  /* ── STRUCTURE BOX ── */
+  .structure {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    padding: 0.6rem 0.9rem;
+    margin: 0.7rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .structure .mír { color: var(--sage); font-style: italic; }
+  .structure .athrú { color: var(--amber); font-weight: 600; }
+  .structure .briathar { color: var(--text-dim); }
+  .structure .note-small { font-size: 0.8rem; color: var(--text-faint); display: block; margin-top: 0.25rem; }
+
+  /* ── EXAMPLES ── */
+  .example-set { margin-top: 0.75rem; }
+  .ex-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-bullet { color: var(--text-faint); flex-shrink: 0; font-size: 0.8rem; }
+  .ga { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; flex: 1; color: var(--text); }
+  .ga strong { color: var(--sage); }
+  .ga em { color: var(--amber); font-style: normal; }
+  .en { font-size: 0.84rem; color: var(--text-dim); font-style: italic; flex: 1; }
+  .ex-note { font-size: 0.78rem; color: var(--amber-dim); margin-top: 0.2rem; padding-left: 1.2rem; display: block; }
+
+  /* ── NOTE BOX ── */
+  .note-box {
+    background: var(--note-bg);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--amber);
+    border-radius: 4px;
+    padding: 0.8rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .note-box strong { color: var(--amber); font-weight: 600; }
+  .note-box .ga { font-size: 0.98rem; display: inline; }
+
+  /* ── CONTRAST BADGE ── */
+  .badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    padding: 0.12rem 0.45rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .badge.dir { color: var(--direct-col); border: 1px solid var(--direct-col); background: rgba(126,184,122,0.07); }
+  .badge.ind { color: var(--indirect-col); border: 1px solid var(--indirect-col); background: rgba(201,145,58,0.07); }
+  .badge.ulst { color: var(--ulster); border: 1px solid var(--ulster); background: rgba(212,168,67,0.07); }
+  .badge.neg { color: var(--red); border: 1px solid var(--red); background: rgba(184,92,92,0.07); }
+
+  /* ── MIRE TABLE ── */
+  .mire-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.87rem; }
+  .mire-table thead th {
+    background: rgba(126,184,122,0.07);
+    color: var(--sage-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border);
+    font-weight: 400;
+    text-align: left;
+  }
+  .mire-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  .mire-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .mire-table td { padding: 0.5rem 0.7rem; border: 1px solid var(--border); vertical-align: top; }
+  .mire-table td:first-child { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; color: var(--sage); white-space: nowrap; }
+  .mire-table td:nth-child(2) { font-style: italic; color: var(--text-dim); font-size: 0.83rem; }
+  .mire-table td:nth-child(3) { font-family: 'Cormorant Garamond', serif; font-size: 0.97rem; color: var(--text); }
+  .mire-type { font-size: 0.6rem; font-family: 'Cinzel',serif; padding: 0.1rem 0.3rem; border-radius: 2px; }
+
+  /* ── CLEACHTADH (Exercise) ── */
+  .ex-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.7rem;
+  }
+  .ex-num { font-family: 'Cinzel', serif; font-size: 0.62rem; color: var(--text-faint); margin-bottom: 0.3rem; letter-spacing: 0.1em; }
+  .ex-sentence { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; color: var(--text); margin-bottom: 0.15rem; }
+  .ex-english { font-size: 0.84rem; color: var(--text-dim); font-style: italic; margin-bottom: 0.5rem; }
+  .reveal-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border2);
+    background: none;
+    color: var(--text-faint);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .reveal-btn:hover { color: var(--amber); border-color: var(--amber-dim); background: rgba(201,145,58,0.06); }
+  .answer-box {
+    display: none;
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 3px;
+    font-size: 0.88rem;
+  }
+  .answer-box.direct { background: rgba(126,184,122,0.1); border: 1px solid rgba(126,184,122,0.25); color: var(--direct-col); }
+  .answer-box.indirect { background: rgba(201,145,58,0.1); border: 1px solid rgba(201,145,58,0.25); color: var(--amber); }
+  .answer-box .ans-type { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.1em; display: block; margin-bottom: 0.2rem; }
+  .answer-box .ans-note { color: var(--text-dim); font-size: 0.82rem; margin-top: 0.3rem; display: block; }
+
+  /* ── QUIZ ── */
+  #quiz-start { text-align: center; padding: 2.5rem 1rem; }
+  .start-btn, .next-btn, .restart-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.8rem 2.2rem;
+    border: 1px solid var(--sage-dim);
+    background: rgba(126,184,122,0.07);
+    color: var(--sage);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+  .start-btn:hover, .next-btn:hover, .restart-btn:hover {
+    background: rgba(126,184,122,0.15);
+    border-color: var(--sage);
+  }
+  #quiz-active { display: none; }
+  .quiz-progress { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.82rem; color: var(--text-dim); }
+  .progress-bar { height: 2px; background: var(--border); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--sage-dim); transition: width 0.4s ease; }
+  .quiz-q {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .quiz-q .hl { color: var(--amber); font-style: italic; }
+  .options { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+  .opt-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.02rem;
+    padding: 0.65rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) { background: rgba(126,184,122,0.06); border-color: var(--sage-dim); color: var(--sage); }
+  .opt-btn.correct { background: rgba(90,158,114,0.15); border-color: var(--green); color: var(--green); }
+  .opt-btn.wrong { background: rgba(184,92,92,0.12); border-color: var(--red); color: var(--red); }
+  .opt-btn:disabled { cursor: default; }
+  .quiz-feedback {
+    border-radius: 3px;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    min-height: 2rem;
+  }
+  .quiz-feedback.correct-fb { background: rgba(90,158,114,0.1); border: 1px solid rgba(90,158,114,0.3); color: var(--green); }
+  .quiz-feedback.wrong-fb { background: rgba(184,92,92,0.1); border: 1px solid rgba(184,92,92,0.3); color: #c88080; }
+  .quiz-feedback.hidden { display: none; }
+  #quiz-results { display: none; text-align: center; padding: 2rem 1rem; }
+  .score-big { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+  .score-label { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .review-list { text-align: left; margin-top: 1.5rem; }
+  .review-item { padding: 0.6rem 0.9rem; border-radius: 3px; margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 0.98rem; }
+  .review-item.r-correct { background: rgba(90,158,114,0.08); border-left: 3px solid var(--green); }
+  .review-item.r-wrong { background: rgba(184,92,92,0.08); border-left: 3px solid var(--red); }
+  .review-item .r-q { color: var(--text); margin-bottom: 0.2rem; }
+  .review-item .r-a { color: var(--text-dim); font-size: 0.85rem; }
+  .review-item .r-ok { color: var(--green); }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+    color: var(--text-faint);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
+  @media(max-width: 600px) {
+    .ex-row { flex-direction: column; gap: 0.2rem; }
+    .en { padding-left: 1.2rem; }
+    .mire-table { font-size: 0.78rem; }
+    header { padding: 1.5rem 1rem 1rem; }
+    .panel { padding: 1rem; }
+    .structure { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-kicker">Gaeilge Uladh · Gramadach</div>
+  <h1>An Clásal Coibhneasta</h1>
+  <div class="header-sub">The Relative Clause — Direct, Indirect &amp; Trigger Words</div>
+  <span class="ornament">❧ ❧ ❧</span>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="showTab('direct')">Díreach</button>
+  <button class="tab-btn" onclick="showTab('indirect')">Indíreach</button>
+  <button class="tab-btn" onclick="showTab('mireanna')">Míreanna</button>
+  <button class="tab-btn" onclick="showTab('cleachtadh')">Cleachtadh</button>
+  <button class="tab-btn" onclick="showTab('quiz')">Tástáil</button>
+</nav>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 1: DÍREACH                         -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-direct" class="panel active">
+  <div class="section-title">An Clásal Coibhneasta Díreach</div>
+  <div class="section-sub">The Direct Relative Clause — used when the antecedent (head noun) is the subject or direct object of the relative verb</div>
+
+  <div class="note-box">
+    <strong>What is a relative clause?</strong> It qualifies a noun, like an adjective — giving more information about it.<br>
+    <span class="ga"><em>an páiste a bhuaigh duais</em></span> — <em>the child who won a prize</em><br>
+    <span class="ga"><em>an páiste a chónaíonn sa Rúis</em></span> — <em>the child who lives in Russia</em><br><br>
+    The noun being described (<em>páiste</em>) is called the <strong>réamhtheachtaí</strong> (antecedent). The relative clause follows it and begins with a <strong>mír choibhneasta</strong> (relative particle).
+  </div>
+
+  <h3 class="group">Present &amp; Future Tense — Struchtúr</h3>
+  <div class="rule-card direct">
+    <div class="rule-title">Clásal Díreach — Aimsir Láithreach / Fháistineach</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">séimhiú</span> + <span class="briathar">briathar</span>
+      <span class="note-small">The particle <strong>a</strong> causes lenition (séimhiú) on the following verb. It plays the role of who/which/that in English.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an duine <strong>a fheicim</strong></span><span class="en">the person that I see (antecedent = object)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an duine <strong>a fheiceann</strong> mé</span><span class="en">the person that sees me (antecedent = subject)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an gasúr <strong>a fhaigheann</strong> na páipéir gach maidin</span><span class="en">the boy who gets the papers every morning</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Cén uair <strong>a thiocfaidh</strong> sí inniu?</span><span class="en">When will she come today?</span></div>
+    </div>
+    <div class="note-box" style="margin-top:0.8rem; margin-bottom:0;">
+      <strong>Special case — tá:</strong> <em>tá</em> does not lenite after <em>a</em>; instead they merge: <span class="ga">bia <strong>atá</strong> réidh</span> — <em>food that is ready</em>
+    </div>
+  </div>
+
+  <h3 class="group">Past Tense — Struchtúr</h3>
+  <div class="rule-card direct">
+    <div class="rule-title">Clásal Díreach — Aimsir Chaite</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">séimhiú</span> + <span class="briathar">briathar</span>
+      <span class="note-small">Structurally identical to the present — no visible difference, since regular verbs already lenite in the past tense anyway.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an tuismitheoir <strong>a mhol</strong> na páistí</span><span class="en">the parent who praised the children (or: whom the children praised)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">na ceoltóirí <strong>a bhain</strong> an chéad duais</span><span class="en">the musicians who won first prize</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin iad na mic léinn <strong>a rinne</strong> an obair.</span><span class="en">Those are the students who did the work.</span></div>
+    </div>
+    <div class="note-box" style="margin-top:0.8rem; margin-bottom:0;">
+      <strong>NB — Vowels &amp; f:</strong> Verbs beginning with a vowel or <em>f</em> in the past keep <em>d'/d'fh</em>: <span class="ga">an béile <strong>a d'ullmhaigh</strong> tú</span> — <em>the meal you prepared</em><br><br>
+      <strong>NB — Irregular verbs:</strong> Irregulars that don't lenite in the past (e.g. <em>fuair</em>) don't lenite in the relative clause either: <span class="ga">an peata <strong>a fuair</strong> an tseanbhean</span> — <em>the pet the old woman got</em>. Use the <strong>independent form</strong> of irregular verbs in the direct relative.
+    </div>
+  </div>
+
+  <h3 class="group">Ulster Irish — Foirmeacha Coibhneasta</h3>
+  <div class="rule-card ulster-note">
+    <div class="rule-title">Ulster &amp; Connacht — Special Relative Endings</div>
+    <div class="structure">
+      Láithreach: <span class="athrú">-(e)ann → -(e)as</span> or <span class="athrú">-(e)anns</span><br>
+      Fáistineach: <span class="athrú">-f(a)idh → -f(e)as</span><br>
+      <span class="note-small">These special endings are used only in positive direct relative clauses in Ulster and Connacht. Not used in negative clauses or the past tense.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an duine <strong>a mholas</strong></span><span class="en">the person who praises / that I praise</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an duine <strong>a mholanns</strong></span><span class="en">the person who praises (Ulster variant)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an múinteoir <strong>a fheicfeas</strong> tú</span><span class="en">the teacher you will see</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga"><strong>Bheas</strong></span><span class="en">is the relative form of <em>beidh</em> (will be)</span></div>
+    </div>
+  </div>
+
+  <h3 class="group">Diúltach — Negative Forms</h3>
+  <div class="rule-card negative">
+    <div class="rule-title">Negative Direct Relative Clause</div>
+    <div class="structure">
+      Láithreach: <span class="mír">réamhtheachtaí</span> + <span class="athrú">nach</span> + <span class="athrú">urú</span> + briathar<br>
+      Chaite (rialta): <span class="mír">réamhtheachtaí</span> + <span class="athrú">nár</span> + <span class="athrú">séimhiú</span> + briathar<br>
+      Chaite (mírialta): <span class="mír">réamhtheachtaí</span> + <span class="athrú">nach</span> + <span class="athrú">urú</span> + briathar
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an fhuaim <strong>nach gcluinim</strong></span><span class="en">the sound I don't hear</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an bia <strong>nach n-ithim</strong></span><span class="en">the food I don't eat</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an mac léinn <strong>nár cheannaigh</strong> na leabhair</span><span class="en">the student who didn't buy the books</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an scannán <strong>nach bhfaca</strong> mé</span><span class="en">the film I didn't see (irregular)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í m'aintín <strong>nach bhfeicim</strong> rómhinic.</span><span class="en">That's my aunt I don't see very often.</span></div>
+    </div>
+  </div>
+
+  <h3 class="group">An Chopail — Copula in Direct Relative Clauses</h3>
+  <div class="rule-card direct">
+    <div class="rule-title">Foirmeacha na Copaile — Clásal Díreach</div>
+    <div class="structure">
+      The copula form does <strong>not change</strong> in direct relative clauses — use <span class="athrú">is / ba / nach / nár(bh)</span> as normal.<br>
+      Exception: <em>ba</em> → <span class="athrú">ab</span> before a vowel or fh.
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an ceol <strong>is</strong> maith liom</span><span class="en">the music I like (present)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an carr <strong>ba</strong> mhaith liom</span><span class="en">the car I would like (conditional)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an rud <strong>ab</strong> fhearr liom</span><span class="en">the thing I would prefer (conditional + vowel)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">rud <strong>nach</strong> ceart</span><span class="en">something that isn't right</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin an guthán póca <strong>ba</strong> mhaith liom do mo bhreithlá.</span><span class="en">That's the phone I'd like for my birthday.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 2: INDÍREACH                       -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-indirect" class="panel">
+  <div class="section-title">An Clásal Coibhneasta Indíreach</div>
+  <div class="section-sub">The Indirect Relative Clause — used when the antecedent is linked to the verb through a possessive adjective, a preposition, or as an object pronoun</div>
+
+  <div class="note-box">
+    <strong>Key principle:</strong> The indirect relative clause is used in three situations:<br>
+    <strong>1.</strong> The antecedent has a <em>genitive/possessive</em> relationship (= whose) — <em>Feidhm Ghinideach</em><br>
+    <strong>2.</strong> The antecedent is linked via a <em>preposition</em> (= whom I spoke to, the house I lived in) — <em>Feidhm Thabharthach</em><br>
+    <strong>3.</strong> The antecedent is the <em>object with a resumptive pronoun</em> — <em>Feidhm Chuspóireach</em>
+  </div>
+
+  <!-- FEIDHM GHINIDEACH -->
+  <h3 class="group">1 · Feidhm Ghinideach — Possessive / "Whose"</h3>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Ghinideach — Present &amp; Future</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">urú</span> + briathar + <em>aidiacht shealbhach</em> + ainmfhocal eile
+      <span class="note-small">The possessive adjective (a, a, a, ár, bhur, a) agrees with the antecedent in number and gender.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>a bhfuil</strong> a mac san Astráil.</span><span class="en">That's the woman whose son is in Australia.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>a mbeidh</strong> a mac ag filleadh ón Astráil.</span><span class="en">That's the woman whose son will be returning from Australia.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin an fear <strong>a raibh</strong> a mhac san otharlann.</span><span class="en">That's the man whose son was in hospital.</span></div>
+    </div>
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Ghinideach — Past Tense (Regular verbs)</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">ar</span> + <span class="athrú">séimhiú</span> + briathar + aidiacht shealbhach + ainmfhocal
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin iad na daoine <strong>ar bhuaigh</strong> a bpáiste an chéad duais.</span><span class="en">Those are the people whose child won first prize.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an fear <strong>ar cheannaigh</strong> a mhac gluaisrothar.</span><span class="en">That's the man whose son bought a motorbike.</span></div>
+    </div>
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Ghinideach — Past Tense (Irregular verbs)</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">urú</span> + briathar + aidiacht shealbhach + ainmfhocal
+      <span class="note-small">Irregular verbs in the past use <strong>a + urú</strong> instead of <strong>ar + séimhiú</strong>.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">An tú an bhean <strong>a bhfuair</strong> a madadh bás?</span><span class="en">Are you the woman whose dog died?</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an fear <strong>a ndeachaigh</strong> a iníon chun na hollscoile.</span><span class="en">That's the man whose daughter went to university.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an fear <strong>a ndeachaigh</strong> a cháil ar fud na tíre.</span><span class="en">That's the man whose reputation spread throughout the country.</span></div>
+    </div>
+  </div>
+
+  <!-- FEIDHM THABHARTHACH -->
+  <h3 class="group">2 · Feidhm Thabharthach — Prepositional Link</h3>
+  <div class="note-box">
+    Used when the antecedent is linked to the clause through a preposition — e.g. <em>the house I live in</em>, <em>the woman I stay with</em>. A <strong>prepositional pronoun</strong> (forainm réamhfhoclach) appears at the end of the clause, agreeing in person, number and gender with the antecedent.
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Thabharthach — Present &amp; Future</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">urú</span> + briathar + <em>forainm réamhfhoclach</em>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>a bhfanaim</strong> ann.</span><span class="en">That's the house I stay in. (<em>ann</em> = in it)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>a bhfanann</strong> siad léi.</span><span class="en">That's the woman they stay with.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin iad na páistí <strong>a mbeidh</strong> tú ag tabhairt an leabhar dóibh.</span><span class="en">Those are the children you'll be giving the book to.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Chonaic mé an siopa <strong>a mbíonn</strong> Micheál ag obair ann.</span><span class="en">I saw the shop Micheál works in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>a bhfuil</strong> mo dheirfiúr ina cónaí léi.</span><span class="en">That's the woman my sister lives with.</span></div>
+    </div>
+    <div class="note-box" style="margin-top:0.8rem; margin-bottom:0;">
+      <strong>Irregular verbs:</strong> Use the dependent form if one exists. E.g.: <span class="ga">Cé hí an bhean <strong>a bhfaighfidh</strong> an duais uaim?</span> — <em>Who is the woman who will get the prize from me?</em>
+    </div>
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Thabharthach — Past Tense (Regular)</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">ar</span> + <span class="athrú">séimhiú</span> + briathar + forainm réamhfhoclach
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>ar fhan</strong> mé ann.</span><span class="en">That's the house I stayed in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>ar fhan</strong> siad léi.</span><span class="en">That's the woman they stayed with.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Seo an dóigh <strong>ar chuala</strong> mé faoi.</span><span class="en">This is how I heard about it.</span></div>
+    </div>
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Thabharthach — Past Tense (Irregular)</div>
+    <div class="structure">
+      <span class="mír">réamhtheachtaí</span> + <span class="athrú">a</span> + <span class="athrú">urú</span> + briathar + forainm réamhfhoclach
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>a raibh</strong> siad ina gcónaí ann.</span><span class="en">That's the house they were living in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an carr <strong>a bhfaca</strong> mé ann tú.</span><span class="en">That's the car I saw you in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Ar chuala tú an scéal <strong>a raibh</strong> gach duine ag caint faoi ar maidin?</span><span class="en">Did you hear the story everyone was talking about this morning?</span></div>
+    </div>
+  </div>
+
+  <!-- FEIDHM CHUSPÓIREACH -->
+  <h3 class="group">3 · Feidhm Chuspóireach — Object with Resumptive Pronoun</h3>
+  <div class="note-box">
+    Used when the antecedent is an object and a resumptive pronoun echoes it inside the clause. Corresponds to English <em>that/which/whom</em> used as object in the middle of a sentence.
+  </div>
+  <div class="rule-card indirect">
+    <div class="rule-title">Feidhm Chuspóireach — Structure &amp; Examples</div>
+    <div class="structure">
+      Tá buidéal sa ghairdín. Thóg páiste é. →<br>
+      Tá buidéal sa ghairdín <span class="athrú">ar thóg</span> páiste <em>é</em>.
+      <span class="note-small">The resumptive pronoun (é/í/iad) echoes the antecedent at the end of the clause.</span>
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Tá leabhair sa leabharlann sin <strong>a n-osclaíonn</strong> daoine go minic <em>iad</em>.</span><span class="en">There are books in that library that people open often.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin an tsióg <strong>nach bhfeicfidh</strong> duine ar bith <em>í</em>.</span><span class="en">That's the fairy that nobody will see.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin í an bhean <strong>a bhfaca</strong> mé <em>a carr</em> taobh amuigh sa chlós.</span><span class="en">That's the woman whose car I saw outside in the yard.</span></div>
+    </div>
+  </div>
+
+  <!-- COPULA INDIRECT -->
+  <h3 class="group">An Chopail sa Chlásal Indíreach</h3>
+  <div class="rule-card indirect">
+    <div class="rule-title">Copula in the Indirect Relative Clause</div>
+    <div class="structure">
+      The copula form in the indirect relative is <span class="athrú">ar</span> (not <em>is/ba</em> as in the direct).
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an duine <strong>ar</strong> leis an carr</span><span class="en">the person who owns the car (= to whom the car belongs)</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">an cailín <strong>ar</strong> mhaith liom labhairt léi</span><span class="en">the girl I'd like to speak with</span></div>
+    </div>
+  </div>
+
+  <!-- NEGATIVE INDIRECT -->
+  <h3 class="group">Diúltach Indíreach — Negative Indirect</h3>
+  <div class="rule-card negative">
+    <div class="rule-title">Negative Indirect Relative Clause</div>
+    <div class="structure">
+      Láithreach/Fáistineach: <span class="athrú">nach</span> + urú + ... + forainm réamhfhoclach<br>
+      Chaite (rialta): <span class="athrú">nár</span> + séimhiú + ... + forainm réamhfhoclach<br>
+      Chaite (mírialta): <span class="athrú">nach</span> + urú + ... + forainm réamhfhoclach
+    </div>
+    <div class="example-set">
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>nach bhfanaim</strong> ann.</span><span class="en">That's the house I don't stay in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>nár fhan</strong> mé ann.</span><span class="en">That's the house I didn't stay in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Sin é an teach <strong>nach raibh</strong> siad ina gcónaí ann.</span><span class="en">That's the house they weren't living in.</span></div>
+      <div class="ex-row"><span class="ex-bullet">·</span><span class="ga">Is bean í <strong>nach gcreidim</strong> focal uaithi.</span><span class="en">She's a woman I don't believe a word from.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 3: MÍREANNA                        -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-mireanna" class="panel">
+  <div class="section-title">Míreanna Ceiste &amp; Coibhneasta</div>
+  <div class="section-sub">Interrogative and complementiser words that trigger either the direct or indirect relative clause</div>
+
+  <div class="note-box">
+    <strong>Key rule:</strong> Certain question words and connective words are followed by either the direct or indirect relative. Knowing which type a word triggers is essential for correct verb forms, mutations, and particles.
+  </div>
+
+  <h3 class="group">Díreach — Words that take the Direct Relative</h3>
+  <table class="mire-table">
+    <thead><tr><th>Mír</th><th>Ciall (Meaning)</th><th>Sampla</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>cad / céard</td>
+        <td>what</td>
+        <td><span class="ga">Cad a tharla? / Céard atá ar siúl agat?</span><br><em>What happened? / What are you up to?</em></td>
+      </tr>
+      <tr>
+        <td>cathain / cén uair / cá huair</td>
+        <td>when</td>
+        <td><span class="ga">Cathain a fuair tú an carr nua?</span><br><em>When did you get the new car?</em></td>
+      </tr>
+      <tr>
+        <td>cá fhad</td>
+        <td>how long</td>
+        <td><span class="ga">Cá fhad a bhí sibh ann?</span><br><em>How long were you there?</em></td>
+      </tr>
+      <tr>
+        <td>cá mhéad / cé mhéad</td>
+        <td>how many / how much</td>
+        <td><span class="ga">Cá mhéad leabhar atá agat?</span><br><em>How many books do you have?</em></td>
+      </tr>
+      <tr>
+        <td>cé</td>
+        <td>who</td>
+        <td><span class="ga">Cé a bhí leat?</span><br><em>Who was with you?</em></td>
+      </tr>
+      <tr>
+        <td>conas / cad é mar</td>
+        <td>how</td>
+        <td><span class="ga">Conas a dhéanann tú é? / Cad é mar a chuir tú aithne air?</span><br><em>How do you do it? / How did you come to know him?</em></td>
+      </tr>
+      <tr>
+        <td>nuair</td>
+        <td>when (conjunction)</td>
+        <td><span class="ga">Cuirfidh mé scairt ort nuair a bheidh deis agam.</span><br><em>I'll call you when I get a chance.</em></td>
+      </tr>
+      <tr>
+        <td>chomh ... is/agus</td>
+        <td>as ... as; however</td>
+        <td><span class="ga">Coimeádfar iad chomh fada agus a bheidh siad de dhíth.</span><br><em>They will be kept as long as they are needed.</em></td>
+      </tr>
+      <tr>
+        <td>cé acu / cibé acu</td>
+        <td>which one (of two); whether</td>
+        <td><span class="ga">Is cuma liomsa cé acu a rinne tú é nó nach ndearna.</span><br><em>I don't care whether you did it or not.</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="group">Indíreach — Words that take the Indirect Relative</h3>
+  <table class="mire-table">
+    <thead><tr><th>Mír</th><th>Ciall (Meaning)</th><th>Sampla</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>an áit / cá háit / cén áit</td>
+        <td>the place / where</td>
+        <td><span class="ga">Sin an áit a raibh sé. / Cá háit a mbíonn na ranganna ar siúl?</span><br><em>That's where he was. / Where are the classes held?</em></td>
+      </tr>
+      <tr>
+        <td>an chaoi / cén chaoi</td>
+        <td>the way / how</td>
+        <td><span class="ga">Cén chaoi ar tharla a leithéid?</span><br><em>How did such a thing happen?</em></td>
+      </tr>
+      <tr>
+        <td>an dóigh / cén dóigh</td>
+        <td>the way / manner</td>
+        <td><span class="ga">Seo an dóigh a n-ullmhaíonn sí a cuid pleananna ceachta.</span><br><em>This is how she prepares her lesson plans.</em></td>
+      </tr>
+      <tr>
+        <td>an fáth / cén fáth</td>
+        <td>the reason / why</td>
+        <td><span class="ga">Is é sin an fáth a raibh áthas orm. / Cén fáth a gcuireann tú do chuid ama amú?</span><br><em>That's why I was glad. / Why do you waste your time?</em></td>
+      </tr>
+      <tr>
+        <td>cad chuige</td>
+        <td>why / what for</td>
+        <td><span class="ga">Cad chuige a ndearna tú sin?</span><br><em>Why did you do that?</em></td>
+      </tr>
+      <tr>
+        <td>cad ina thaobh</td>
+        <td>why / for what reason</td>
+        <td><span class="ga">Cad ina thaobh ar inis tú bréag?</span><br><em>Why did you tell a lie?</em></td>
+      </tr>
+      <tr>
+        <td>an tslí / cén tslí</td>
+        <td>the way</td>
+        <td><span class="ga">Ní maith liom an tslí a bhfuil sé á chur i bhfeidhm.</span><br><em>I don't like the way it's being implemented.</em></td>
+      </tr>
+      <tr>
+        <td>a (= an méid a)</td>
+        <td>what / as much as (amount)</td>
+        <td><span class="ga">Ólann sé a dtuilleann sé. / D'ól sé ar thuill sé.</span><br><em>He drinks what he earns. (pres.) / He drank what he earned. (past)</em></td>
+      </tr>
+      <tr>
+        <td>gach a / gach ar</td>
+        <td>everything that</td>
+        <td><span class="ga">Faigheann sí gach a bhfuil ag teastáil. / Fuair sí gach ar theastaigh uaithi.</span><br><em>She gets everything that's needed. / She got everything she needed.</em></td>
+      </tr>
+      <tr>
+        <td>mar (= áit)</td>
+        <td>where (place)</td>
+        <td><span class="ga">Chuaigh mé go dtí an siopa éadaí mar a ndíoltar geansaithe áille olla.</span><br><em>I went to the clothes shop where lovely wool jumpers are sold.</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <strong>Ulster note — cad é:</strong> In Ulster Irish, <em>cad</em> is typically heard as <strong>cad é</strong> (< <em>cad é</em>). This can precede the direct relative: <span class="ga">Cad é a tharla? · Cad é atá agat?</span><br><br>
+    <strong>ar vs a + urú in the past:</strong> The shift between <em>ar + séimhiú</em> (regular past) and <em>a + urú</em> (irregular past/tabharthach function) is the single most important thing to practise in the indirect clause.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 4: CLEACHTADH                      -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-cleachtadh" class="panel">
+  <div class="section-title">Cleachtadh — Identify the Type</div>
+  <div class="section-sub">From your exercise sheets — read each sentence, work out whether it's a direct or indirect relative clause, then reveal the answer. An English translation is given for each.</div>
+
+  <div class="note-box" style="margin-bottom:1.5rem;">
+    <strong>Díreach</strong> — the antecedent is subject or direct object of the relative verb.<br>
+    <strong>Indíreach</strong> — the antecedent is linked via possession (whose), a preposition, or a resumptive pronoun.
+  </div>
+
+  <script>
+  const exercises = [
+    { ga: "An é sin an gasúr a fhaigheann na páipéir gach maidin?", en: "Is that the boy who gets the papers every morning?", type: "direct", note: "The gasúr (boy) is the subject of fhaigheann. Direct — a + séimhiú." },
+    { ga: "Cén uair a thiocfaidh sí inniu?", en: "When will she come today?", type: "direct", note: "cén uair triggers the direct relative. a + séimhiú (thiocfaidh ← tiocfaidh)." },
+    { ga: "Sin é an fear a bhfaca Seán a charr sa chlós.", en: "That's the man whose car Seán saw in the yard.", type: "indirect", note: "Feidhm ghinideach (whose): a bhfaca + possessive adjective a charr. Irregular past (feic) → a + urú." },
+    { ga: "Chonaic mé an siopa a mbíonn Micheál ag obair ann.", en: "I saw the shop Micheál works in.", type: "indirect", note: "Feidhm thabharthach: linked by ann (in it). a + urú (mbíonn)." },
+    { ga: "Sin í an bhean a bhfuil mo dheirfiúr ina cónaí léi.", en: "That's the woman my sister lives with.", type: "indirect", note: "Feidhm thabharthach: linked by léi (with her). a + urú." },
+    { ga: "Is ar an Sathairn seo chugainn a thabharfaidh mé an t-airgead ar ais di.", en: "It's next Saturday that I'll give the money back to her.", type: "direct", note: "Cleft sentence — is + ... + a. Direct relative with séimhiú." },
+    { ga: "Sin iad na ceoltóirí a bhain an chéad duais sa chomórtas.", en: "Those are the musicians who won first prize in the competition.", type: "direct", note: "ceoltóirí is subject of bhain. Direct — a + séimhiú." },
+    { ga: "Sin í m'aintín nach bhfeicim rómhinic.", en: "That's my aunt I don't see very often.", type: "direct", note: "Negative direct: nach + urú (bhfeicim ← feicim). Antecedent = direct object." },
+    { ga: "Is bean í nach gcreidim focal uaithi.", en: "She's a woman I don't believe a word from.", type: "indirect", note: "Feidhm thabharthach: uaithi (from her) links bean to the clause. Negative: nach + urú." },
+    { ga: "Is duine é sin a dhéanann a dhícheall i gcónaí.", en: "That's a person who always does their best.", type: "direct", note: "Antecedent = subject of dhéanann. Direct — a + séimhiú." },
+    { ga: "Sin an fear a raibh a mhac san otharlann.", en: "That's the man whose son was in hospital.", type: "indirect", note: "Feidhm ghinideach: a raibh + a mhac. Irregular past (bí) → a + urú (raibh)." },
+    { ga: "An sibhse na paisinéirí a bhfuil bhur gcuid málaí caillte?", en: "Are you the passengers whose bags are lost?", type: "indirect", note: "Feidhm ghinideach (whose bags). a + urú (bhfuil) + bhur gcuid málaí." },
+    { ga: "Sin obair nach mbeidh a toradh le feiceáil go ceann i bhfad.", en: "That's work whose results won't be seen for a long time.", type: "indirect", note: "Feidhm ghinideach + negative: nach + urú (mbeidh) + a toradh." },
+    { ga: "Seo an cailín ar casadh a huncail ort ag an gceolchoirm.", en: "This is the girl whose uncle you met at the concert.", type: "indirect", note: "Feidhm ghinideach, past regular: ar + séimhiú (casadh) + a huncail." },
+    { ga: "Is duine é sin a ndeachaigh a cháil ar fud na tíre.", en: "That's a person whose reputation spread throughout the country.", type: "indirect", note: "Feidhm ghinideach, past irregular (téigh): a + urú (ndeachaigh) + a cháil." },
+    { ga: "Sin iad na mic léinn a bhfuil a gcuid pictiúr ar taispeáint i Seomra na hEalaíne.", en: "Those are the students whose pictures are on display in the Art Room.", type: "indirect", note: "Feidhm ghinideach: a bhfuil + a gcuid pictiúr. Plural antecedent." },
+    { ga: "Sin fear a mbíodh a bhean chéile i bhfeighil an tsiopa tráth.", en: "That's a man whose wife used to be in charge of the shop once.", type: "indirect", note: "Feidhm ghinideach: a mbíodh + a bhean chéile." },
+    { ga: "Ar chuala tú an scéal a raibh gach duine ag caint faoi ar maidin?", en: "Did you hear the story everyone was talking about this morning?", type: "indirect", note: "Feidhm thabharthach: faoi links scéal to the clause. Irregular (bí): a raibh + faoi." },
+    { ga: "Sin í an bhean a bhfaca mé a carr taobh amuigh sa chlós níos luaithe inniu.", en: "That's the woman whose car I saw outside in the yard earlier today.", type: "indirect", note: "Feidhm ghinideach, irregular past (feic): a bhfaca + a carr." },
+    { ga: "Sin iad na daoine a ndeachaigh mé ar ollscoil ina dteannta.", en: "Those are the people I went to university with.", type: "indirect", note: "Feidhm thabharthach: ina dteannta (with them) links daoine. Irregular (téigh): a ndeachaigh." },
+    { ga: "Cá bhfuil an t-airgead a bhí ar an tábla?", en: "Where is the money that was on the table?", type: "direct", note: "Antecedent (airgead) = subject of bhí. Direct — a + séimhiú." },
+    { ga: "Labhróidh an t-ollamh a thug an chaint aréir leis an rang inniu.", en: "The professor who gave the talk last night will speak to the class today.", type: "direct", note: "Antecedent = subject of thug. Direct — a + séimhiú." },
+    { ga: "Rinne an gasúr ar thug mé an teachtaireacht ghutháin dó dearmad nóta a fhágáil.", en: "The boy I gave the phone message to forgot to leave a note.", type: "direct", note: "Feidhm thabharthach: dó (to him) links gasúr. Past regular: ar + séimhiú (thug). Note: despite the prepositional link, your sheet marks this as díreach — verify with your lecturer." },
+    { ga: "Sin an guthán póca ba mhaith liom do mo bhreithlá.", en: "That's the phone I'd like for my birthday.", type: "direct", note: "Copula in direct relative: ba mhaith liom. No verb form changes needed." },
+    { ga: "Seo an dóigh a n-ullmhaíonn sí a cuid pleananna ceachta.", en: "This is how she prepares her lesson plans.", type: "indirect", note: "an dóigh triggers the indirect relative. a + urú (n-ullmhaíonn)." },
+    { ga: "Cén bhliain ar bhog siad ar ais go hÉirinn?", en: "What year did they move back to Ireland?", type: "indirect", note: "cén bhliain triggers indirect. Past regular: ar + séimhiú (bhog)." },
+    { ga: "Seo an ghirseach ar bhain a máthair an chéad duais sa chrannchur scoile.", en: "This is the girl whose mother won first prize in the school raffle.", type: "indirect", note: "Feidhm ghinideach: ar bhain (past regular) + a máthair." },
+    { ga: "Dúirt an bhean ar labhair mé léi liom go raibh cónaí ort anseo.", en: "The woman I spoke to told me you live here.", type: "indirect", note: "Feidhm thabharthach: léi (with her). Past regular: ar + séimhiú (labhair)." },
+    { ga: "Bhain sé an baile amach aréir ar a hocht a chlog, rud a chuir iontas an domhain orainn.", en: "He reached home last night at eight o'clock, which surprised us greatly.", type: "direct", note: "rud a... — non-personal relative (= which). Direct — a + séimhiú (chuir)." },
+    { ga: "Taispeáin dom an ghirseach nach dtéann a máthair amach ag obair.", en: "Show me the girl whose mother doesn't go out to work.", type: "indirect", note: "Feidhm ghinideach + negative: nach + urú (dtéann) + a máthair." },
+  ];
+  </script>
+
+  <div id="exercise-container"></div>
+
+  <script>
+  (function buildExercises() {
+    const container = document.getElementById('exercise-container');
+    exercises.forEach((ex, i) => {
+      const div = document.createElement('div');
+      div.className = 'ex-item';
+      const typeClass = ex.type === 'direct' ? 'direct' : 'indirect';
+      const typeLabel = ex.type === 'direct' ? 'DÍREACH — Direct' : 'INDÍREACH — Indirect';
+      div.innerHTML = `
+        <div class="ex-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="ex-sentence">${ex.ga}</div>
+        <div class="ex-english">${ex.en}</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Taispeáin freagra</button>
+        <div class="answer-box ${typeClass}" id="ans-${i}">
+          <span class="ans-type">${typeLabel}</span>
+          <span class="ans-note">${ex.note}</span>
+        </div>`;
+      container.appendChild(div);
+    });
+  })();
+
+  function toggleAnswer(btn) {
+    const idx = Array.from(document.querySelectorAll('.reveal-btn')).indexOf(btn);
+    const box = document.getElementById('ans-' + idx);
+    if (box.style.display === 'block') {
+      box.style.display = 'none';
+      btn.textContent = 'Taispeáin freagra';
+    } else {
+      box.style.display = 'block';
+      btn.textContent = 'Folaigh freagra';
+    }
+  }
+  </script>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 5: QUIZ                            -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-quiz" class="panel">
+  <div class="section-title">Tástáil</div>
+  <div class="section-sub">20 questions on direct and indirect relative clauses, mutations, and trigger words</div>
+
+  <div id="quiz-start">
+    <p style="color:var(--text-dim); font-family:'Cormorant Garamond',serif; font-size:1.1rem;">Questions cover identifying clause type, selecting the correct particle and mutation, and choosing the right verb form.</p>
+    <button class="start-btn" onclick="startQuiz()">Tosaigh an Tástáil</button>
+  </div>
+
+  <div id="quiz-active">
+    <div class="quiz-progress">
+      <span id="q-counter">1 / 20</span>
+      <span id="q-score-live">✓ 0</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="quiz-q" id="quiz-question"></div>
+    <div class="options" id="quiz-options"></div>
+    <div class="quiz-feedback hidden" id="quiz-feedback"></div>
+    <button class="next-btn" id="next-btn" style="display:none" onclick="nextQuestion()">Ar aghaidh →</button>
+  </div>
+
+  <div id="quiz-results">
+    <div class="score-big" id="final-score"></div>
+    <div class="score-label" id="final-label"></div>
+    <div class="review-list" id="review-list"></div>
+    <button class="restart-btn" onclick="restartQuiz()">Tosaigh arís</button>
+  </div>
+</div>
+
+<footer>Gaeilge Uladh · An Clásal Coibhneasta · Gramadach</footer>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── QUIZ DATA ──
+const quizData = [
+  {
+    q: 'What type of relative clause is this? <span class="hl">Sin é an fear a bhfaca Seán a charr sa chlós.</span> (That\'s the man whose car Seán saw in the yard.)',
+    opts: ['Díreach — Direct', 'Indíreach — Indirect'],
+    ans: 1,
+    exp: '<strong>Indíreach</strong> — Feidhm ghinideach (possessive/whose). The man\'s car is the link. Past irregular (feic) uses <em>a + urú</em>: <em>a bhfaca</em>.'
+  },
+  {
+    q: 'What is the correct particle and mutation for a <span class="hl">positive direct relative clause</span> in the present tense?',
+    opts: ['a + urú', 'a + séimhiú', 'nach + urú', 'ar + séimhiú'],
+    ans: 1,
+    exp: '<strong>a + séimhiú</strong>. The relative particle <em>a</em> causes lenition: <em>an duine a fheiceann mé</em> — the person who sees me.'
+  },
+  {
+    q: 'Fill in the correct form: <span class="hl">Sin é an teach ___ mé ann.</span> (That\'s the house I stayed in.) — past tense, regular verb <em>fan</em>.',
+    opts: ['a bhfan', 'ar fhan', 'nár fhan', 'a d\'fhan'],
+    ans: 1,
+    exp: '<strong>ar fhan</strong> — feidhm thabharthach (prepositional link via <em>ann</em>), past tense regular verb: <em>ar + séimhiú</em>.'
+  },
+  {
+    q: 'Which sentence uses the <span class="hl">negative direct relative</span> correctly in the present?',
+    opts: [
+      'an mac léinn nár cheannaigh na leabhair',
+      'an fhuaim nach gcluinim',
+      'an fhuaim nár chluinim',
+      'an fhuaim a gcluinim'
+    ],
+    ans: 1,
+    exp: '<strong>nach gcluinim</strong> — negative direct, present tense: <em>nach + urú</em>. Option (a) is past regular. Options (c) and (d) are wrong mutations.'
+  },
+  {
+    q: 'What does the mír <span class="hl">cén fáth</span> trigger?',
+    opts: ['Direct relative clause', 'Indirect relative clause', 'Either — no difference', 'Neither — it\'s a preposition'],
+    ans: 1,
+    exp: '<strong>Indirect</strong>. <em>cén fáth</em> (why/the reason) always takes the indirect: <em>Cén fáth a gcuireann tú do chuid ama amú?</em>'
+  },
+  {
+    q: 'In Ulster Irish, what special ending replaces <em>-ann</em> on the verb in a positive direct relative clause?',
+    opts: ['-adh', '-as / -anns', '-fidh', '-aí'],
+    ans: 1,
+    exp: '<strong>-(e)as</strong> or <strong>-(e)anns</strong>: <em>an duine a mholas / a mholanns</em>. Future: <em>-f(a)idh → -f(e)as</em>: <em>an múinteoir a fheicfeas tú</em>.'
+  },
+  {
+    q: 'Which sentence is an example of <span class="hl">feidhm thabharthach</span> (prepositional function)?',
+    opts: [
+      'Sin í an bhean a bhfuil a mac san Astráil.',
+      'Sin í an bhean a bhfanann siad léi.',
+      'Sin iad na daoine ar bhuaigh a bpáiste an chéad duais.',
+      'an tuismitheoir a mhol na páistí'
+    ],
+    ans: 1,
+    exp: '<strong>a bhfanann siad léi</strong> — the preposition <em>le</em> links the woman to the clause via <em>léi</em> (with her). This is the prepositional function.'
+  },
+  {
+    q: 'Past tense, irregular verb, genitive function — which is correct? <span class="hl">Sin é an fear ___ a iníon chun na hollscoile.</span>',
+    opts: ['ar dheachaigh', 'a ndeachaigh', 'nach ndeachaigh', 'a raibh'],
+    ans: 1,
+    exp: '<strong>a ndeachaigh</strong> — irregular past (téigh), genitive/indirect function: <em>a + urú</em>. Regular past would be <em>ar + séimhiú</em>.'
+  },
+  {
+    q: 'What does <span class="hl">nuair</span> trigger?',
+    opts: ['Indirect relative', 'Direct relative', 'Neither — it\'s a preposition', 'Both, depending on tense'],
+    ans: 1,
+    exp: '<strong>Direct relative</strong>. <em>nuair a bheidh deis agam</em> — when I get a chance. <em>nuair</em> always takes the direct.'
+  },
+  {
+    q: 'Complete: <span class="hl">Tá leabhair sa leabharlann sin ___ daoine go minic iad.</span> (There are books in that library that people open often.)',
+    opts: ['a osclaíonn', 'a n-osclaíonn', 'ar oscail', 'nach n-osclaíonn'],
+    ans: 1,
+    exp: '<strong>a n-osclaíonn ... iad</strong> — feidhm chuspóireach (object function) with resumptive pronoun <em>iad</em>. Present indirect: <em>a + urú</em>.'
+  },
+  {
+    q: 'What is the copula form used in the <span class="hl">direct</span> relative clause?',
+    opts: ['ar', 'is / ba / nach / nár(bh)', 'a bhfuil', 'nach bhfuil'],
+    ans: 1,
+    exp: '<strong>is / ba / nach / nár(bh)</strong> — the copula does not change form in the direct relative. <em>ar</em> is the indirect copula form.'
+  },
+  {
+    q: 'Which mír triggers the <span class="hl">indirect</span> relative?',
+    opts: ['nuair', 'cé', 'cén dóigh', 'cá fhad'],
+    ans: 2,
+    exp: '<strong>cén dóigh</strong> triggers the indirect: <em>Cén dóigh a ndéantar an obair?</em> — How is the work done? The others (nuair, cé, cá fhad) take the direct.'
+  },
+  {
+    q: 'Identify the type: <span class="hl">Ar chuala tú an scéal a raibh gach duine ag caint faoi ar maidin?</span> (Did you hear the story everyone was talking about?)',
+    opts: ['Díreach', 'Indíreach'],
+    ans: 1,
+    exp: '<strong>Indíreach</strong> — feidhm thabharthach. The story is linked via <em>faoi</em> (about it). Past irregular (bí): <em>a raibh</em>.'
+  },
+  {
+    q: 'For a <span class="hl">negative indirect</span> clause in the past with a regular verb, which particle is used?',
+    opts: ['nach + urú', 'nár + séimhiú', 'ní + séimhiú', 'a + urú'],
+    ans: 1,
+    exp: '<strong>nár + séimhiú</strong>: <em>Sin é an teach nár fhan mé ann</em> — That\'s the house I didn\'t stay in. Same pattern as the direct negative past regular.'
+  },
+  {
+    q: 'Complete this sentence: <span class="hl">an ceol ___ maith liom</span> (the music I like) — using the copula in the direct relative.',
+    opts: ['a bhfuil', 'is', 'ba', 'ar'],
+    ans: 1,
+    exp: '<strong>is</strong> — copula in present direct relative. <em>an ceol is maith liom</em>. The form does not change. Compare: <em>an carr ba mhaith liom</em> (conditional).'
+  },
+  {
+    q: '<span class="hl">tá</span> after the relative particle <em>a</em> — what happens?',
+    opts: ['It lenites: a thá', 'It merges with a to form atá', 'It eclipses: a bhfuil', 'Nothing — tá stays as tá'],
+    ans: 1,
+    exp: '<strong>atá</strong> — <em>tá</em> merges with <em>a</em> to form <em>atá</em>. E.g. <em>bia atá réidh</em> — food that is ready. This is a direct relative clause.'
+  },
+  {
+    q: 'What function does this sentence show? <span class="hl">Sin an tsióg nach bhfeicfidh duine ar bith í.</span> (That\'s the fairy nobody will see.)',
+    opts: ['Feidhm ghinideach', 'Feidhm thabharthach', 'Feidhm chuspóireach', 'Clásal díreach'],
+    ans: 2,
+    exp: '<strong>Feidhm chuspóireach</strong> — the antecedent is the object; the resumptive pronoun <em>í</em> echoes it. Negative indirect future: <em>nach + urú</em>.'
+  },
+  {
+    q: 'Identify the type: <span class="hl">Sin iad na ceoltóirí a bhain an chéad duais.</span> (Those are the musicians who won first prize.)',
+    opts: ['Díreach', 'Indíreach'],
+    ans: 0,
+    exp: '<strong>Díreach</strong> — the musicians (ceoltóirí) are the subject of <em>bhain</em>. Direct: <em>a + séimhiú</em> (bhain ← bain).'
+  },
+  {
+    q: 'In the genitive indirect relative, past tense, with a <span class="hl">regular verb</span>, which particle is correct?',
+    opts: ['a + urú', 'ar + séimhiú', 'nach + urú', 'nár + séimhiú'],
+    ans: 1,
+    exp: '<strong>ar + séimhiú</strong>: <em>Sin iad na daoine ar bhuaigh a bpáiste an chéad duais</em> — whose child won. Regular past indirect: always <em>ar + séimhiú</em>.'
+  },
+  {
+    q: 'Which sentence correctly uses the <span class="hl">relative form of beidh</span> in Ulster Irish?',
+    opts: ['an áit a mbeidh siad', 'an áit a bheas siad', 'an áit ar bheas siad', 'an áit nach mbeas siad'],
+    ans: 1,
+    exp: '<strong>a bheas</strong> — <em>bheas</em> is the Ulster/Connacht relative form of <em>beidh</em>. Used in positive direct relative clauses in the future.'
+  }
+];
+
+let cur = 0, score = 0, answered = false, userAns = [];
+
+function startQuiz() {
+  cur = 0; score = 0; answered = false; userAns = [];
+  document.getElementById('quiz-start').style.display = 'none';
+  document.getElementById('quiz-results').style.display = 'none';
+  document.getElementById('quiz-active').style.display = 'block';
+  render();
+}
+
+function render() {
+  answered = false;
+  const q = quizData[cur];
+  document.getElementById('q-counter').textContent = (cur+1) + ' / ' + quizData.length;
+  document.getElementById('q-score-live').textContent = '✓ ' + score;
+  document.getElementById('progress-fill').style.width = (cur / quizData.length * 100) + '%';
+  document.getElementById('quiz-question').innerHTML = q.q;
+  document.getElementById('quiz-feedback').className = 'quiz-feedback hidden';
+  document.getElementById('next-btn').style.display = 'none';
+  const od = document.getElementById('quiz-options');
+  od.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn';
+    b.innerHTML = o;
+    b.onclick = () => pick(i);
+    od.appendChild(b);
+  });
+}
+
+function pick(i) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[cur];
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('quiz-feedback');
+  if (i === q.ans) {
+    score++;
+    btns[i].classList.add('correct');
+    fb.className = 'quiz-feedback correct-fb';
+    fb.innerHTML = '✓ Ceart! ' + q.exp;
+  } else {
+    btns[i].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    fb.className = 'quiz-feedback wrong-fb';
+    fb.innerHTML = '✗ Mícheart. ' + q.exp;
+  }
+  userAns.push({ q: q.q, chosen: q.opts[i], correct: q.opts[q.ans], ok: i === q.ans });
+  document.getElementById('next-btn').style.display = 'block';
+  document.getElementById('q-score-live').textContent = '✓ ' + score;
+}
+
+function nextQuestion() {
+  cur++;
+  if (cur >= quizData.length) showResults();
+  else render();
+}
+
+function showResults() {
+  document.getElementById('quiz-active').style.display = 'none';
+  document.getElementById('quiz-results').style.display = 'block';
+  document.getElementById('final-score').textContent = score + ' / ' + quizData.length;
+  const pct = score / quizData.length;
+  let lbl = '';
+  if (pct === 1) lbl = 'Foirfe! Tá an clásal coibhneasta ar eolas agat go hiomlán.';
+  else if (pct >= 0.85) lbl = 'Ar fheabhas! Tuigeann tú an struchtúr go maith.';
+  else if (pct >= 0.7) lbl = 'Go maith. Athléigh na rialacha a bhain botún asat.';
+  else if (pct >= 0.5) lbl = 'Measartha maith — léigh na nótaí arís le do thoil.';
+  else lbl = 'Tabhair faoi na nótaí arís — tiocfaidh leat!';
+  document.getElementById('final-label').textContent = lbl;
+  const rl = document.getElementById('review-list');
+  rl.innerHTML = '<div style="font-family:\'Cinzel\',serif;font-size:0.62rem;letter-spacing:0.15em;color:var(--sage-dim);margin-bottom:0.8rem;">REVIEW</div>';
+  userAns.forEach((a, idx) => {
+    const d = document.createElement('div');
+    d.className = 'review-item ' + (a.ok ? 'r-correct' : 'r-wrong');
+    d.innerHTML = `<div class="r-q">${a.ok ? '✓' : '✗'} Q${idx+1}: ${a.q.replace(/<[^>]+>/g,'')}</div>
+      ${!a.ok ? `<div class="r-a">Your answer: ${a.chosen} · <span class="r-ok">Correct: ${a.correct}</span></div>` : ''}`;
+    rl.appendChild(d);
+  });
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-results').style.display = 'none';
+  document.getElementById('quiz-start').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
